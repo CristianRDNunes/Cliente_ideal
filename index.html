@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Cliente Ideal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        .input-group label {
+            font-weight: 500;
+            color: #1f2937;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #1f2937;
+            background-color: #f9fafb;
+            transition: all 0.2s ease-in-out;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        .btn {
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1e40af;
+        }
+        .loading-indicator {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="container mx-auto">
+        <form id="contactForm" class="card space-y-6">
+            <h1 class="text-3xl font-bold text-center text-gray-800">Perfil do Cliente Ideal</h1>
+            <p class="text-center text-gray-600">
+                Responda este breve questionário para nos ajudar a entender melhor seu negócio.
+            </p>
+            
+            <!-- Campo para o nome do cliente -->
+            <div class="input-group">
+                <label for="name">Seu Nome</label>
+                <input type="text" id="name" name="Nome do Cliente" required>
+            </div>
+
+            <!-- Seção 1: Definição do Nicho ou Mercado -->
+            <div id="section1" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">1. Definição do Nicho ou Mercado</h2>
+                <div class="input-group">
+                    <label for="market">Qual é o nicho ou mercado que você deseja abordar?</label>
+                    <input type="text" id="market" name="Mercado" required>
+                </div>
+            </div>
+
+            <!-- Seção 2: Identificação do Cliente Ideal -->
+            <div id="section2" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">2. Identificação do Cliente Ideal</h2>
+                <div class="input-group">
+                    <label for="profile">Quem é o seu Cliente Ideal? (Faixa etária, profissão, etc.)</label>
+                    <textarea id="profile" name="Perfil do Cliente" rows="3" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="goals">Quais são os maiores objetivos, sonhos e desejos do seu Cliente Ideal?</label>
+                    <textarea id="goals" name="Objetivos do Cliente" rows="3" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="values">Quais valores seu Cliente Ideal mais preza? (Liste 3)</label>
+                    <textarea id="values" name="Valores do Cliente" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <!-- Seção 3: Principais Problemas e Desafios -->
+            <div id="section3" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">3. Principais Problemas e Desafios</h2>
+                <div class="input-group">
+                    <label for="problems">Liste os principais problemas ou desafios que seu Cliente Ideal enfrenta.</label>
+                    <textarea id="problems" name="Problemas do Cliente" rows="3" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="attempts">O que seu Cliente Ideal já tentou fazer para resolver esses problemas?</label>
+                    <textarea id="attempts" name="Tentativas Anteriores" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <!-- Seção 4: Onde Encontrar o Cliente Ideal -->
+            <div id="section4" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">4. Onde Encontrar o Cliente Ideal</h2>
+                <div class="input-group">
+                    <label for="channels">Onde ele costuma buscar informações? Em quais plataformas ou comunidades? Que tipo de perfis ele segue? Que tipo de vídeos acompanha?</label>
+                    <textarea id="channels" name="Canais do Cliente" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center space-x-2">
+                <button type="submit" id="submitBtn" class="btn">Enviar Respostas</button>
+                <div id="loadingIndicator" class="loading-indicator hidden"></div>
+            </div>
+            
+            <div id="successMessage" class="hidden text-center mt-4 p-4 rounded-lg text-white bg-green-500">
+                Respostas enviadas com sucesso!
+            </div>
+            
+            <div id="errorMessage" class="hidden text-center mt-4 p-4 rounded-lg text-red-700 bg-red-100">
+                <p class="font-bold">Ocorreu um erro!</p>
+                <p id="errorDetails"></p>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorDetails = document.getElementById('errorDetails');
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Enviando...';
+            loadingIndicator.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            const name = form.elements['Nome do Cliente'].value;
+            const market = form.elements['Mercado'].value;
+            const profile = form.elements['Perfil do Cliente'].value;
+            const goals = form.elements['Objetivos do Cliente'].value;
+            const values = form.elements['Valores do Cliente'].value;
+            const problems = form.elements['Problemas do Cliente'].value;
+            const attempts = form.elements['Tentativas Anteriores'].value;
+            const channels = form.elements['Canais do Cliente'].value;
+            
+            const formData = {
+                'Nome do Cliente': name,
+                'Mercado': market,
+                'Perfil do Cliente': profile,
+                'Objetivos do Cliente': goals,
+                'Valores do Cliente': values,
+                'Problemas do Cliente': problems,
+                'Tentativas Anteriores': attempts,
+                'Canais do Cliente': channels,
+            };
+
+            const formspreeUrl = 'https://formspree.io/f/xvgwoevq';
+            try {
+                const formspreeResponse = await fetch(formspreeUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (formspreeResponse.ok) {
+                    form.reset();
+                    successMessage.classList.remove('hidden');
+                } else {
+                    console.error("Erro ao enviar para o Formspree.");
+                    errorDetails.textContent = "Erro ao enviar o formulário. Por favor, tente novamente.";
+                    errorMessage.classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error("Erro geral:", error);
+                errorDetails.textContent = "Ocorreu um erro de rede. Verifique sua conexão e tente novamente.";
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Enviar Respostas';
+                loadingIndicator.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
