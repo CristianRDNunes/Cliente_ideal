@@ -55,18 +55,13 @@
         button:hover {
             background-color: #0056b3;
         }
-        #message {
-            margin-top: 15px;
-            text-align: center;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Responda ao Questionário</h2>
-    <form id="questionario-form">
+    <form id="questionario-form" action="https://formspree.io/f/mqaykrlz" method="POST">
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
@@ -81,46 +76,7 @@
         </div>
         <button type="submit">Enviar Respostas</button>
     </form>
-    <div id="message"></div>
 </div>
-
-<script>
-    const form = document.getElementById('questionario-form');
-    const messageDiv = document.getElementById('message');
-    const webhookUrl = 'https://webhook.site/fdc53142-0dee-46b4-b391-b7f95d1590a2';
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        messageDiv.textContent = 'Enviando...';
-        messageDiv.style.color = '#007bff';
-
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        try {
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                messageDiv.textContent = 'Respostas enviadas com sucesso!';
-                messageDiv.style.color = 'green';
-                form.reset();
-            } else {
-                throw new Error('Erro ao enviar as respostas.');
-            }
-        } catch (error) {
-            console.error('Erro:', error);
-            messageDiv.textContent = 'Erro ao enviar. Tente novamente.';
-            messageDiv.style.color = 'red';
-        }
-    });
-</script>
 
 </body>
 </html>
