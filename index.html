@@ -1,275 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Cliente Ideal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #e9ecef;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
         }
         .container {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 100%;
             max-width: 600px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
         }
-        h2 {
-            color: #343a40;
-            margin-bottom: 20px;
-        }
-        .question-card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: 1px solid #dee2e6;
-            text-align: left;
-        }
-        .question-card label {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #495057;
+        .input-group label {
+            font-weight: 500;
+            color: #1f2937;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
-        .question-card input, .question-card textarea {
+        .input-group input, .input-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 1em;
-            margin-bottom: 15px;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #1f2937;
+            background-color: #f9fafb;
+            transition: all 0.2s ease-in-out;
         }
-        .navigation {
-            margin-top: 30px;
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
-        .navigation button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            font-size: 1em;
+        .btn {
+            background-color: #2563eb;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 0 10px;
         }
-        .navigation button:hover {
-            background-color: #0056b3;
-        }
-        .navigation button:disabled {
-            background-color: #adb5bd;
-            cursor: not-allowed;
-        }
-        .results {
-            margin-top: 20px;
-            text-align: left;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #ced4da;
-        }
-        .results h3 {
-            color: #28a745;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .results p {
-            font-size: 1em;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-        .results strong {
-            color: #343a40;
+        .btn:hover {
+            background-color: #1e40af;
         }
     </style>
 </head>
-<body>
+<body class="p-6">
+    <div class="container mx-auto">
+        <form id="contactForm" action="https://formspree.io/f/mqaykrlz" method="POST" class="card space-y-6">
+            <h1 class="text-3xl font-bold text-center text-gray-800">Perfil do Cliente Ideal</h1>
+            <p class="text-center text-gray-600">
+                Responda este breve questionário para nos ajudar a entender melhor seu negócio.
+            </p>
 
-<div class="container">
-    <h2 id="title">Vamos Definir Seu Cliente Ideal</h2>
-    
-    <div id="step-1" class="step">
-        <div class="question-card">
-            <label for="name">1. Dê um nome ao seu cliente ideal:</label>
-            <input type="text" id="name" placeholder="Ex: 'Maria, a Empreendedora'">
-        </div>
-        <div class="navigation">
-            <button id="next1">Próximo</button>
-        </div>
+            <!-- Seção 1: Definição do Tema ou Mercado -->
+            <div id="section1" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">1. Definição do Tema ou Mercado</h2>
+                <div class="input-group">
+                    <label for="market">Qual é o tema ou mercado que você deseja abordar?</label>
+                    <input type="text" id="market" name="Mercado" placeholder="Ex: Educação online, Moda sustentável..." required>
+                </div>
+            </div>
+
+            <!-- Seção 2: Identificação do Cliente Ideal -->
+            <div id="section2" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">2. Identificação do Cliente Ideal</h2>
+                <div class="input-group">
+                    <label for="profile">Quem é o seu Cliente Ideal? (Faixa etária, profissão, etc.)</label>
+                    <textarea id="profile" name="Perfil do Cliente" rows="3" placeholder="Ex: Mulheres entre 25-40 anos..." required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="goals">Quais são os maiores objetivos, sonhos e desejos do seu Cliente Ideal?</label>
+                    <textarea id="goals" name="Objetivos do Cliente" rows="3" placeholder="Ex: Ter mais autoestima, sentir-se mais confiante..." required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="values">Quais valores seu Cliente Ideal mais preza? (Liste 3)</label>
+                    <textarea id="values" name="Valores do Cliente" rows="3" placeholder="Ex: Praticidade, facilidade, bem-estar..." required></textarea>
+                </div>
+            </div>
+
+            <!-- Seção 3: Principais Problemas e Desafios -->
+            <div id="section3" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">3. Principais Problemas e Desafios</h2>
+                <div class="input-group">
+                    <label for="problems">Liste os principais problemas ou desafios que seu Cliente Ideal enfrenta.</label>
+                    <textarea id="problems" name="Problemas do Cliente" rows="3" placeholder="Ex: Falta de tempo, frustração com dietas..." required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="attempts">O que seu Cliente Ideal já tentou fazer para resolver esses problemas?</label>
+                    <textarea id="attempts" name="Tentativas Anteriores" rows="3" placeholder="Ex: Já tentou dietas da moda, comprou cursos online..." required></textarea>
+                </div>
+            </div>
+
+            <!-- Seção 4: Onde Encontrar o Cliente Ideal -->
+            <div id="section4" class="space-y-4">
+                <h2 class="text-2xl font-semibold text-gray-700">4. Onde Encontrar o Cliente Ideal</h2>
+                <div class="input-group">
+                    <label for="channels">Onde ele costuma buscar informações? Em quais plataformas ou comunidades?</label>
+                    <textarea id="channels" name="Canais do Cliente" rows="3" placeholder="Ex: Instagram, YouTube, LinkedIn, grupos no Facebook..." required></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="btn">Enviar Respostas</button>
+            </div>
+        </form>
     </div>
-    
-    <div id="step-2" class="step" style="display:none;">
-        <div class="question-card">
-            <label for="age">2. Qual a idade e profissão dele(a)?</label>
-            <input type="text" id="age" placeholder="Ex: '35 anos, designer freelancer'">
-        </div>
-        <div class="navigation">
-            <button id="prev2">Anterior</button>
-            <button id="next2">Próximo</button>
-        </div>
-    </div>
-
-    <div id="step-3" class="step" style="display:none;">
-        <div class="question-card">
-            <label for="pains">3. Quais são os principais desafios ou 'dores' que ele(a) enfrenta?</label>
-            <textarea id="pains" rows="4" placeholder="Ex: 'Falta de tempo, dificuldade em encontrar clientes, problemas com preços.'"></textarea>
-        </div>
-        <div class="navigation">
-            <button id="prev3">Anterior</button>
-            <button id="next3">Próximo</button>
-        </div>
-    </div>
-
-    <div id="step-4" class="step" style="display:none;">
-        <div class="question-card">
-            <label for="goals">4. Quais são os principais objetivos e desejos dele(a)?</label>
-            <textarea id="goals" rows="4" placeholder="Ex: 'Ter mais liberdade, conseguir clientes de alto valor, ter uma agenda organizada.'"></textarea>
-        </div>
-        <div class="navigation">
-            <button id="prev4">Anterior</button>
-            <button id="next4">Próximo</button>
-        </div>
-    </div>
-
-    <div id="step-5" class="step" style="display:none;">
-        <div class="question-card">
-            <label for="solution">5. Como seu produto/serviço ajuda a resolver esses problemas?</label>
-            <textarea id="solution" rows="4" placeholder="Ex: 'Meu serviço oferece uma solução de software para otimizar o tempo e organizar projetos.'"></textarea>
-        </div>
-        <div class="navigation">
-            <button id="prev5">Anterior</button>
-            <button id="generate">Gerar Perfil</button>
-        </div>
-    </div>
-
-    <div id="results-screen" class="step" style="display:none;">
-        <div class="results">
-            <h3>Perfil do Cliente Ideal</h3>
-            <p><strong>Nome:</strong> <span id="res-name"></span></p>
-            <p><strong>Idade e Profissão:</strong> <span id="res-age"></span></p>
-            <p><strong>Desafios:</strong> <span id="res-pains"></span></p>
-            <p><strong>Objetivos:</strong> <span id="res-goals"></span></p>
-            <p><strong>Sua Solução:</strong> <span id="res-solution"></span></p>
-        </div>
-        <div class="navigation">
-            <button id="start-over">Recomeçar</button>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    const steps = ['step-1', 'step-2', 'step-3', 'step-4', 'step-5', 'results-screen'];
-    let currentStep = 0;
-    const answers = {};
-    const title = document.getElementById('title');
-
-    function showStep(stepIndex) {
-        steps.forEach((stepId, index) => {
-            document.getElementById(stepId).style.display = index === stepIndex ? 'block' : 'none';
-        });
-    }
-
-    function collectAnswer() {
-        if (currentStep < 5) {
-            const inputId = steps[currentStep].replace('step-', '');
-            const input = document.getElementById(inputId);
-            answers[inputId] = input.value;
-        }
-    }
-
-    function generateProfile() {
-        document.getElementById('res-name').textContent = answers.name || 'Não informado';
-        document.getElementById('res-age').textContent = answers.age || 'Não informado';
-        document.getElementById('res-pains').textContent = answers.pains || 'Não informado';
-        document.getElementById('res-goals').textContent = answers.goals || 'Não informado';
-        document.getElementById('res-solution').textContent = answers.solution || 'Não informado';
-        title.textContent = 'Seu Perfil Está Pronto!';
-    }
-
-    document.getElementById('next1').addEventListener('click', () => {
-        collectAnswer();
-        currentStep = 1;
-        showStep(currentStep);
-    });
-
-    document.getElementById('next2').addEventListener('click', () => {
-        collectAnswer();
-        currentStep = 2;
-        showStep(currentStep);
-    });
-
-    document.getElementById('next3').addEventListener('click', () => {
-        collectAnswer();
-        currentStep = 3;
-        showStep(currentStep);
-    });
-    
-    document.getElementById('next4').addEventListener('click', () => {
-        collectAnswer();
-        currentStep = 4;
-        showStep(currentStep);
-    });
-
-    document.getElementById('prev2').addEventListener('click', () => {
-        currentStep = 0;
-        showStep(currentStep);
-    });
-
-    document.getElementById('prev3').addEventListener('click', () => {
-        currentStep = 1;
-        showStep(currentStep);
-    });
-    
-    document.getElementById('prev4').addEventListener('click', () => {
-        currentStep = 2;
-        showStep(currentStep);
-    });
-    
-    document.getElementById('prev5').addEventListener('click', () => {
-        currentStep = 3;
-        showStep(currentStep);
-    });
-
-    document.getElementById('generate').addEventListener('click', () => {
-        collectAnswer();
-        generateProfile();
-        currentStep = 5;
-        showStep(currentStep);
-    });
-
-    document.getElementById('start-over').addEventListener('click', () => {
-        Object.keys(answers).forEach(key => answers[key] = '');
-        document.getElementById('name').value = '';
-        document.getElementById('age').value = '';
-        document.getElementById('pains').value = '';
-        document.getElementById('goals').value = '';
-        document.getElementById('solution').value = '';
-        currentStep = 0;
-        showStep(currentStep);
-        title.textContent = 'Vamos Definir Seu Cliente Ideal';
-    });
-
-    showStep(currentStep);
-</script>
-
 </body>
 </html>
